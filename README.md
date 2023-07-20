@@ -2,7 +2,8 @@
  Proyecto de  gestión de empresa
 
 ## Dependencias
-
+- Java 11
+- Maven 
 - Spring web
 - Spring Boot DevTools 
 - PostgreSQL Driver 
