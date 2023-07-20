@@ -1,3 +1,3 @@
 
-{
-Kproyecto/src/test/java/com/packtrack/proyecto/ProyectoApplicationTests.java,8\c\8c275346c0c5dde847427a7611c6a165290e49d6
+>
+.gitattributes,2\4\24139dae656713ba861751fb2c2ac38839349a7a
