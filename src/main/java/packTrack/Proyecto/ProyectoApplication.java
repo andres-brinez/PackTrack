@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import packTrack.Proyecto.modelos.Paquete;
 import packTrack.Proyecto.modelos.Usuario;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) // indica que es una aplicacion de spring boot
@@ -25,7 +26,7 @@ public class ProyectoApplication {
 		return "Hola a todAs ";
 	}
 
-	@GetMapping("/pruebaModelo")
+	@GetMapping("/pruebaModeloUsuario")
 	public String prueba() {
 
 		Usuario usuario = new Usuario(1105610650,"Andres Felipe Briñez","comedor20","Administrador");
@@ -35,5 +36,13 @@ public class ProyectoApplication {
 
 	}
 
+	@GetMapping("/pruebaModeloPaquete")
+	public String pruebaPaquete() {
+		Usuario empleado = new Usuario(1105610650,"Andres Felipe Briñez","comedor20","Empleado");
+		Usuario usuario= new Usuario(1125646650,"Juan Felipe Lopez","comedor20","Usuario");
+
+		Paquete paquete = new Paquete(usuario,empleado,"Paquete 1","Bogota","Paquete de prueba",1,200,100,200,300,100000);
+		return paquete.toString();
+	}
 
 }
