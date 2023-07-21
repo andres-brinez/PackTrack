@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "Usuarios")
@@ -30,6 +30,8 @@ public class Usuario {
         this.nombre = nombre;
         this.password = password;
         this.rol = rol;
+
+        this.createdAt = Date.valueOf(java.time.LocalDate.now()); // Obtener la fecha actual
 
     }
 

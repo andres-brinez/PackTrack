@@ -3,7 +3,8 @@ package packTrack.Proyecto.modelos;
 import jakarta.persistence.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Paquetes")
@@ -50,13 +51,15 @@ public Paquete(Usuario usuario, Usuario empleado, String nombre, String origen, 
         this.largo = largo;
         this.valorDeclarado = valorDeclarado;
 
-        this.createdAt = new Date(); // Obtener la fecha actual
+        this.createdAt = Date.valueOf(LocalDate.now());; // Obtener la fecha actual
 
         // Todo: Convertir la fecha actual en el formato deseado para mostrarlo en la vista
-        // Define el formato deseado SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        // Convierte la fecha actual en el formato deseado String fecha = formatoFecha.format(createdAt);
+        /**
+         * Crea un objeto DateTimeFormatter para formatear la fecha: DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+         * Convierte la fecha en formato java.sql.Date a una cadena de texto con el formato deseado: String fechaFormateada = fechaActual.toLocalDate().format(formatter);
+          */
 
-        this.estado = "Registrado";
+    this.estado = "Registrado";
         this.clasificacion = generarClasificacion();
 
     }
