@@ -33,3 +33,6 @@ build/
 
 ### VS Code ###
 .vscode/
+*.pb
+.idea/sonarlint/issuestore/index.pb
+*.pb
