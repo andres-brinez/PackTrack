@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import packTrack.Proyecto.modelos.Envio;
 import packTrack.Proyecto.modelos.Paquete;
 import packTrack.Proyecto.modelos.Usuario;
 
@@ -44,5 +45,14 @@ public class ProyectoApplication {
 		Paquete paquete = new Paquete(usuario,empleado,"Paquete 1","Bogota","Paquete de prueba",1,200,100,200,300,100000);
 		return paquete.toString();
 	}
+
+    @GetMapping("/pruebaModeloEnvio")
+    public String pruebaEnvio() {
+        Usuario empleado = new Usuario(1105610650,"Andres Felipe Briñez","comedor20","Empleado");
+        Usuario usuario= new Usuario(1125646650,"Juan Felipe Lopez","comedor20","Usuario");
+        Paquete paquete = new Paquete(usuario,empleado,"Paquete 1","Bogota","Paquete de prueba",1,200,100,200,300,100000);
+        Envio envio = new Envio(paquete,"Bogota","Maria Lopez","Envio de un paquete","Economico");
+        return envio.toString();
+    }
 
 }
