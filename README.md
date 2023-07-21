@@ -9,3 +9,4 @@
 - PostgreSQL Driver 
 - Spring Data JPA
 - OAuth2 Client 
+- thymeleaf
