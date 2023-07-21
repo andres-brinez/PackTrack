@@ -112,10 +112,7 @@ public class Factura {
         factura += "Descripcion: " + envio.getDescripcion() + "\n";
         factura += "Categoria: " + envio.getCategoria() + "\n";
         factura += "Estado: " + envio.getEstado() + "\n";
-        factura += "Nota de seguimiento: " + envio.getNotaSeguimiento() + "\n";
-        factura += "Ubicacion actual: " + envio.getUbicacionActual() + "\n";
         factura += "Fecha de envio: " + envio.getFechaEnvio() + "\n";
-        factura += "Fecha de recepcion: " + envio.getFechaRecepcion() + "\n";
         factura += "Monto total: " + montoTotal + "\n";
 
         return factura;
