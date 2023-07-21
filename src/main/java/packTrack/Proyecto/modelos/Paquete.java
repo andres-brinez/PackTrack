@@ -2,6 +2,7 @@ package packTrack.Proyecto.modelos;
 
 import jakarta.persistence.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -50,6 +51,11 @@ public Paquete(Usuario usuario, Usuario empleado, String nombre, String origen, 
         this.valorDeclarado = valorDeclarado;
 
         this.createdAt = new Date(); // Obtener la fecha actual
+
+        // Todo: Convertir la fecha actual en el formato deseado para mostrarlo en la vista
+        // Define el formato deseado SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        // Convierte la fecha actual en el formato deseado String fecha = formatoFecha.format(createdAt);
+
         this.estado = "Registrado";
         this.clasificacion = generarClasificacion();
 
@@ -193,8 +199,8 @@ public Paquete(Usuario usuario, Usuario empleado, String nombre, String origen, 
     public String toString() {
         return "Paquete{" +
                 "id=" + id +
-                ", usuario=" + usuario +
-                ", empleado=" + empleado +
+                ", usuario=" + usuario.getNombre() +
+                ", empleado=" + empleado.getNombre() +
                 ", nombre='" + nombre + '\'' +
                 ", origen='" + origen + '\'' +
                 ", descripcion='" + descripcion + '\'' +
