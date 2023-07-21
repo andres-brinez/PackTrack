@@ -20,12 +20,14 @@ public class controllerUsuario {
         return "Hola a todAs ";
     }
 
-    @GetMapping({"/usuarios", "/VerUsuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
+    @GetMapping({"/","/usuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
     public String viewUsuarios(Model model) {
+        System.out.println("Se accedió a la vista de usuarios");
         List<Usuario> listaUsuarios = usuarioService.getAllUsuarios(); // Se obtiene la lista de usuarios usando el metodo del servicio que deuelve la lista de usuarios
         model.addAttribute("listaUsuarios", listaUsuarios); // Se agrega la lista de usuarios al modelo para poder usarla en la vista
         return "historialUsuarios"; // Se retorna el nombre de la vista
     }
+
 
 
 }
