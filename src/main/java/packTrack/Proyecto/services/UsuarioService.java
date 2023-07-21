@@ -16,9 +16,6 @@ public class UsuarioService {
     @Autowired // Conecta esta clase  con el repositorio
     UsuarioRepository usuarioRepository; // Se crea una instancia del repositorio para poder usar los metodos de jpa
 
-    public void crearUsuario(){
-
-    }
 
     // Metodo que retornará la lista de Usuarios usuando metodo el metodo findAll() heredado de jpa con usuarioRepository
     public List<Usuario> getAllUsuarios(){
@@ -42,6 +39,17 @@ public class UsuarioService {
         Usuario user = usuarioRepository.save(usuario); // regresa el usuario (Una entidad )
 
         if (usuarioRepository.findById(user.getNumeroIdentificacion()) != null) { // Si se retorna un  usuario significa que se actualizó o se guardó
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteUsuario(Long id) {
+
+        usuarioRepository.deleteById(id);
+
+        // verifica si se eliminó el usuario
+        if (usuarioRepository.findById(id) == null) { // Si se busca el usuario y no se encuentra y no devuelve nada  significa que se eliminó
             return true;
         }
         return false;
