@@ -11,10 +11,10 @@
 <h1>Historial de Usuarios</h1>
 
 <!-- Redirecciona a un servicio, por lo que se usa @{} -->
-<a th:href="@{/usuarios/crearUsuario}" class="ver">Ver</a>
+<!--<a th:href="@{}" class="ver">Ver</a>
 <a th:href="@{crearUsuario}" class="crear">Crear</a>
-<a href="" class="editar">Editar</a>
-<a href="" class="eliminar">Eliminar</a>
+<a th:href="@{editarUsua}" class="editar">Editar</a>
+<a href="" class="eliminar">Eliminar</a>-->
 
 <table>
     <tr>
@@ -23,17 +23,20 @@
         <th>Nombre</th>
         <th>correo</th>
         <th>Rol</th>
+        <th></th>
+        <th></th>
     </tr>
 
     <!--Iteramos la lista de usuarios  que viene desde el controlador como un objeto model -->
     <tr th:each="usuario : ${listaUsuarios}">
 
-        <td> <input type="checkbox" id="cbox1" value=th:text="${usuario.numeroIdentificacion}"> </td>
+        <td> <input type="checkbox" id="cbox1" value=th:value="${usuario.numeroIdentificacion}"> </td>
         <td th:text="${usuario.numeroIdentificacion}"></td>
         <td th:text="${usuario.nombre}"></td>
         <td th:text="${usuario.correo}"></td>
         <td th:text="${usuario.rol}"></td>
-
+        <td><a th:href="@{editarUsuario/{numeroIdentificacion}(numeroIdentificacion=${usuario.numeroIdentificacion})}" class="editar">Editar</a></td>
+        <td><a th:href="@{eliminarUsuario/{numeroIdentificacion}(numeroIdentificacion=${usuario.numeroIdentificacion})}" class="eliminar">Eliminar</a></td>
     </tr>
 
 </table>
