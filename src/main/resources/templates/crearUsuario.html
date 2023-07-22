@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear usuario</title>
+        <link rel="stylesheet" type="text/css" th:href="@{css/historialUsuarios.css}">
+    </head>
+    <body>
+
+    <h1>Crear usuario</h1>
+
+    <a href="javascript:history.go(-1)"> Atrás</a>
+    <!-- El atributo th:action es la ruta del servicio que se va a consumir -->
+    <!-- El atributo th:object es el objeto que se recibe desde  el controlador  y el que se envia-->
+
+    <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuario}" method="post">
+
+        <!--th:field="*{nombreCampo}"  indica que en un campo en el objeto(modelo)-->
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" th:field="*{nombre}" id="nombre" name="nombre" required><br>
+
+        <label for="documento">Número de Documento:</label>
+        <input type="text" th:field="*{numeroIdentificacion}" id="documento" name="documento" required><br>
+
+        <label for="correo">Correo:</label>
+        <input type="email" th:field="*{correo}" id="correo" name="correo" required><br>
+
+        <label for="rol">Rol:</label>
+        <select th:field="*{rol}"  id="rol" name="rol" required>
+            <option value="Administrador">Administrador</option>
+            <option value="Empleado">Empleado</option>
+            <option value="Usuario">Usuario</option>
+        </select><br>
+
+        <label for="contrasena">Contraseña</label>
+        <input type="password" th:field="*{password}"  id="contrasena" name="contrasena" required><br>
+
+        <button type="submit">Guardar</button>
+
+    </form>
+
+
+
+    </body>
+</html>
