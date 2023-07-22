@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <title>Usuarios</title>
     <link rel="stylesheet" type="text/css" th:href="@{css/historialUsuarios.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/historialUsuarios.css">
 </head>
 <body>
+
 <h1>Historial de Usuarios</h1>
 
-<button type="button"> Ver</button>
-<button type="button">Eliminar</button>
-<button type="button">Modificar</button>
-<button type="button">Crear</button>
+<!-- Redirecciona a un servicio, por lo que se usa @{} -->
+<a th:href="@{/usuarios/crearUsuario}" class="ver">Ver</a>
+<a th:href="@{/usuarios/crearUsuario}" class="crear">Crear</a>
+<a href="" class="editar">Editar</a>
+<a href="" class="eliminar">Eliminar</a>
+
 <table>
     <tr>
         <th> </th>
@@ -19,7 +23,6 @@
         <th>Nombre</th>
         <th>correo</th>
         <th>Rol</th>
-
     </tr>
 
     <!--Iteramos la lista de usuarios  que viene desde el controlador como un objeto model -->
@@ -32,6 +35,7 @@
         <td th:text="${usuario.rol}"></td>
 
     </tr>
+
 </table>
 </body>
 </html>
