@@ -13,7 +13,7 @@
     <!-- El atributo th:action es la ruta del servicio que se va a consumir -->
     <!-- El atributo th:object es el objeto que se recibe desde  el controlador  y el que se envia-->
 
-    <form th:action="@{/usuarios/guardarUsuario}" th:object="${usuario}" method="post">
+    <form th:action="@{guardarUsuario}" th:object="${usuario}" method="post">
 
         <!--th:field="*{nombreCampo}"  indica que en un campo en el objeto(modelo)-->
 
