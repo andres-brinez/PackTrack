@@ -19,11 +19,11 @@ public class controllerUsuario {
 
     //? SERVICIOS REST
 
-    @GetMapping({"/","/historialUsuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
+    @GetMapping({"/", "/historialUsuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
     public String viewUsuarios(Model model) {
         List<Usuario> listaUsuarios = usuarioService.getAllUsuarios(); // Se obtiene la lista de usuarios usando el metodo del servicio que deuelve la lista de usuarios
         model.addAttribute("listaUsuarios", listaUsuarios); // Se agrega la lista de usuarios al modelo para poder usarla en la vista
-        return "usuarios/historialUsuarios"; // Se retorna el nombre de la vista
+        return "/usuarios/historialUsuarios"; // Se retorna el nombre de la vista
     }
 
     @GetMapping("/crearUsuario")
@@ -37,12 +37,9 @@ public class controllerUsuario {
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(Usuario usuario, RedirectAttributes redirectAttributes) {
 
-        if (usuarioService.saveOrUpdateUsuario(usuario)==true) { // Si el usuario se guarda correctamente
-            //redirectAttributes.addFlashAttribute("success", "Usuario guardado correctamente"); // Se agrega un atributo al modelo para poder usarlo en la vista
+        if (usuarioService.saveOrUpdateUsuario(usuario)) { // Si el usuario se guarda correctamente
             return "redirect:/historialUsuarios"; // Se redirecciona al servicio, no al template
-
         }
-            //redirectAttributes.addFlashAttribute("error", "No se pudo guardar el usuario"); // Se agrega un atributo al modelo para poder usarlo en la vista
         return "redirect:/crearUsuario";   // Se redirecciona al servicio, no al template
     }
 
@@ -56,16 +53,19 @@ public class controllerUsuario {
 
     @PostMapping("/actualizarUsuario")
     public String actualizarUsuario(Usuario usuario) {
-        System.out.println(usuario.getNumeroIdentificacion());
-        if (usuarioService.saveOrUpdateUsuario(usuario)){
-            //redirectAttributes.addFlashAttribute("success", "Usuario actualizado correctamente");
+        if (usuarioService.saveOrUpdateUsuario(usuario)) {
             return "redirect:/historialUsuarios";
         }
-        //redirectAttributes.addFlashAttribute("error", "No se pudo actualizar el usuario");
         return "redirect:/editarUsuario/" + usuario.getNumeroIdentificacion();
     }
 
-
+    @GetMapping("/eliminarUsuario/{numeroIdentificacion}")
+    public String eliminarUsuario(@PathVariable long numeroIdentificacion) {
+        if (usuarioService.deleteUsuario(numeroIdentificacion)) {
+            return "redirect:/historialUsuarios";
+        }
+        return "redirect:/historialUsuarios";
+    }
 
 
 }
