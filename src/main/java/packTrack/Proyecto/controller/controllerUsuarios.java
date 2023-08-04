@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import packTrack.Proyecto.modelos.Usuario;
-import packTrack.Proyecto.services.UsuarioService;
+import packTrack.Proyecto.services.UsuariosService;
 
 import java.util.List;
 
 @Controller // marca la clase como un controlador  para manejar las solicitudes HTTP y enviar respuestas tipo html
-public class controllerUsuario {
+public class controllerUsuarios {
     @Autowired // Conecta esta clase  con el servicio
-    UsuarioService usuarioService; // Se crea una instancia del servicio para poder usar los metodos de jpa
+    UsuariosService usuariosService; // Se crea una instancia del servicio para poder usar los metodos de jpa
 
     //? SERVICIOS REST
 
     @GetMapping({"/", "/historialUsuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
     public String viewUsuarios(Model model) {
-        List<Usuario> listaUsuarios = usuarioService.getAllUsuarios(); // Se obtiene la lista de usuarios usando el metodo del servicio que deuelve la lista de usuarios
+        List<Usuario> listaUsuarios = usuariosService.getAllUsuarios(); // Se obtiene la lista de usuarios usando el metodo del servicio que deuelve la lista de usuarios
         model.addAttribute("listaUsuarios", listaUsuarios); // Se agrega la lista de usuarios al modelo para poder usarla en la vista
         return "/usuarios/historialUsuarios"; // Se retorna el nombre de la vista
     }
@@ -37,7 +37,7 @@ public class controllerUsuario {
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(Usuario usuario, RedirectAttributes redirectAttributes) {
 
-        if (usuarioService.saveOrUpdateUsuario(usuario)) { // Si el usuario se guarda correctamente
+        if (usuariosService.saveOrUpdateUsuario(usuario)) { // Si el usuario se guarda correctamente
             return "redirect:/historialUsuarios"; // Se redirecciona al servicio, no al template
         }
         return "redirect:/crearUsuario";   // Se redirecciona al servicio, no al template
@@ -46,14 +46,14 @@ public class controllerUsuario {
     @GetMapping("/editarUsuario/{numeroIdentificacion}")
     //@PathVariable se usa para obtener el valor de la variable en la ruta
     public String editarUsuario(Model model, @PathVariable long numeroIdentificacion) {
-        Usuario usuario = usuarioService.getUsuarioById(numeroIdentificacion);
+        Usuario usuario = usuariosService.getUsuarioById(numeroIdentificacion);
         model.addAttribute("usuario", usuario);
         return "usuarios/editarUsuario";
     }
 
     @PostMapping("/actualizarUsuario")
     public String actualizarUsuario(Usuario usuario) {
-        if (usuarioService.saveOrUpdateUsuario(usuario)) {
+        if (usuariosService.saveOrUpdateUsuario(usuario)) {
             return "redirect:/historialUsuarios";
         }
         return "redirect:/editarUsuario/" + usuario.getNumeroIdentificacion();
@@ -61,7 +61,7 @@ public class controllerUsuario {
 
     @GetMapping("/eliminarUsuario/{numeroIdentificacion}")
     public String eliminarUsuario(@PathVariable long numeroIdentificacion) {
-        if (usuarioService.deleteUsuario(numeroIdentificacion)) {
+        if (usuariosService.deleteUsuario(numeroIdentificacion)) {
             return "redirect:/historialUsuarios";
         }
         return "redirect:/historialUsuarios";
