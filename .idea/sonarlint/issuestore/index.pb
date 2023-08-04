@@ -20,7 +20,3 @@ m
 =src/main/java/packTrack/Proyecto/services/UsuarioService.java,b\b\bb5b9ba333463ad9b4715900c74928fed02fc5ba
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-e
-5src/main/java/packTrack/Proyecto/modelos/Usuario.java,4\c\4c5b4c073f103edb72e570cd288c50cf8d747367
-i
-9src/main/java/packTrack/Proyecto/ProyectoApplication.java,2\1\21ec291586301e73ee523cbe69838be016109a51

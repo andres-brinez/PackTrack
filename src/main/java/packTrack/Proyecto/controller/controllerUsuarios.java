@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,16 +21,19 @@ public class controllerUsuarios {
     //? SERVICIOS REST
 
     @GetMapping({"/", "/historialUsuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
-    public String viewUsuarios(Model model) {
+    public String viewUsuarios(@ModelAttribute("mensaje") String mensajeRecibido, Model model) {
+        // @ModelAttribute("mensaje") String mensaje: Se usa para obtener el mensaje enviado por el metodo que redirecciona
         List<Usuario> listaUsuarios = usuariosService.getAllUsuarios(); // Se obtiene la lista de usuarios usando el metodo del servicio que deuelve la lista de usuarios
         model.addAttribute("listaUsuarios", listaUsuarios); // Se agrega la lista de usuarios al modelo para poder usarla en la vista
+        model.addAttribute("mensaje", mensajeRecibido); // Se agrega el mensaje al modelo para poder usarlo en la vista
         return "/usuarios/historialUsuarios"; // Se retorna el nombre de la vista
     }
 
     @GetMapping("/crearUsuario")
-    public String crearUsuario(Model model) {
+    public String crearUsuario(Model model,@ModelAttribute("mensaje") String mensajeRecibido) {
         Usuario nuevoUsuario = new Usuario();
         model.addAttribute("usuario", nuevoUsuario); //se guarda un objeto en el  modelo para poder usarlo en la vista y guardar valores
+        model.addAttribute("mensaje", mensajeRecibido); // Se agrega el mensaje al modelo para poder usarlo en la vista
         return "/usuarios/crearUsuario"; // Se retorna el nombre de la vista
     }
 
@@ -38,34 +42,41 @@ public class controllerUsuarios {
     public String guardarUsuario(Usuario usuario, RedirectAttributes redirectAttributes) {
 
         if (usuariosService.saveOrUpdateUsuario(usuario)) { // Si el usuario se guarda correctamente
+            redirectAttributes.addFlashAttribute("mensaje", "saveOk"); // Se agrega un mensaje al modelo para poder usarlo en la vista
             return "redirect:/historialUsuarios"; // Se redirecciona al servicio, no al template
         }
+        redirectAttributes.addFlashAttribute("mensaje", "saveError"); // Se agrega un mensaje al modelo para poder usarlo en la vista
         return "redirect:/crearUsuario";   // Se redirecciona al servicio, no al template
     }
 
     @GetMapping("/editarUsuario/{numeroIdentificacion}")
     //@PathVariable se usa para obtener el valor de la variable en la ruta
-    public String editarUsuario(Model model, @PathVariable long numeroIdentificacion) {
+    public String editarUsuario(Model model, @PathVariable long numeroIdentificacion,@ModelAttribute("mensaje") String mensajeRecibido) {
         Usuario usuario = usuariosService.getUsuarioById(numeroIdentificacion);
         model.addAttribute("usuario", usuario);
+        model.addAttribute("mensaje", mensajeRecibido); // Se agrega el mensaje al modelo para poder usarlo en la vista
         return "usuarios/editarUsuario";
     }
 
     @PostMapping("/actualizarUsuario")
-    public String actualizarUsuario(Usuario usuario) {
+    public String actualizarUsuario(Usuario usuario,RedirectAttributes redirectAttributes) {
         if (usuariosService.saveOrUpdateUsuario(usuario)) {
+            redirectAttributes.addFlashAttribute("mensaje", "updateOk");
             return "redirect:/historialUsuarios";
         }
+        redirectAttributes.addFlashAttribute("mensaje", "updateError");
         return "redirect:/editarUsuario/" + usuario.getNumeroIdentificacion();
     }
 
     @GetMapping("/eliminarUsuario/{numeroIdentificacion}")
-    public String eliminarUsuario(@PathVariable long numeroIdentificacion) {
+    public String eliminarUsuario(@PathVariable long numeroIdentificacion,RedirectAttributes redirectAttributes) {
+
         if (usuariosService.deleteUsuario(numeroIdentificacion)) {
+            redirectAttributes.addFlashAttribute("mensaje", "deleteOk");
             return "redirect:/historialUsuarios";
         }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
         return "redirect:/historialUsuarios";
     }
-
 
 }

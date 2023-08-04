@@ -20,7 +20,3 @@ m
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-e
-5src/main/java/packTrack/Proyecto/modelos/Usuario.java,4\c\4c5b4c073f103edb72e570cd288c50cf8d747367
-i
-9src/main/java/packTrack/Proyecto/ProyectoApplication.java,2\1\21ec291586301e73ee523cbe69838be016109a51
