@@ -49,7 +49,7 @@ public class UsuariosService {
         usuariosRepository.deleteById(id);
 
         // verifica si se eliminó el usuario
-        if (usuariosRepository.findById(id) == null) { // Si se busca el usuario y no se encuentra y no devuelve nada  significa que se eliminó
+        if (usuariosRepository.findById(id).isEmpty()) { // Si se busca el usuario y no se encuentra y no devuelve nada  significa que se eliminó
             return true;
         }
         return false;
