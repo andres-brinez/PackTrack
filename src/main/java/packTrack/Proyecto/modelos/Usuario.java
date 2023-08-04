@@ -23,6 +23,8 @@ public class Usuario {
 
 
     public Usuario() {
+
+        this.createdAt = Date.valueOf(java.time.LocalDate.now()); // Obtener la fecha actual
     }
 
     public Usuario(long numeroIdentificacion, String nombre, String password,String rol) {
@@ -30,8 +32,6 @@ public class Usuario {
         this.nombre = nombre;
         this.password = password;
         this.rol = rol;
-
-        this.createdAt = Date.valueOf(java.time.LocalDate.now()); // Obtener la fecha actual
 
     }
 
