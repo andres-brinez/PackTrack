@@ -13,7 +13,7 @@
 <form th:action=@{/actualizarUsuario} th:object="${usuario}" method="post">
 
 
-   <input type="number" minlength="5"  id="numeroIdentificacion" name="numeroIdentificacion"  th:field="*{numeroIdentificacion}" required hidden="hidden"><br>
+   <input type="number" minlength="5"  id="numeroIdentificacion" name="numeroIdentificacion"  th:field="*{numeroIdentificacion}" ><br>
 
     <p th:text="${usuario.nombre}"></p>
     <p th:text="${usuario.telefono}"></p>
@@ -43,6 +43,8 @@
 
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" name="descripcion"  rows="4" cols="50"   th:field="*{descripcion}"></textarea><br>
+
+    <input type="tel" id="password" name="password"  th:field="*{password}" hidden="hidden"><br>
 
     <button type="submit">Guardar Cambios</button>
 </form>

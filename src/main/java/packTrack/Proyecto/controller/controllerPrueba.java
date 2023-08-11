@@ -35,7 +35,7 @@ public class controllerPrueba {
     @GetMapping("/pruebaModeloEnvio")
     public String pruebaEnvio() {
         Usuario empleado = new Usuario(1105610650,"Andres Felipe Briñez","comedor20","Empleado");
-        Usuario usuario= new Usuario(1125646650,"Juan Felipe Lopez","comedor20","Usuario");
+        Usuario usuario= new Usuario(1125646650,"maria","comedor20","Usuario");
         Paquete paquete = new Paquete(usuario,empleado,"Paquete 1","Bogota","Paquete de prueba",1,200,100,200,300,100000);
         Envio envio = new Envio(paquete,"Bogota","Maria Lopez","Envio de un paquete","Economico");
         return envio.toString();

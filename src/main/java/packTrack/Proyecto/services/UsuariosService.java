@@ -13,8 +13,8 @@ public class UsuariosService {
 
     // Se crean los metodos para el CRUD de la tabla Usuario usando la instancia del repositorio que hereda de jpa
     // Se  pueden crear las acciones que se quieren realizar en la tabla Usuario
-    @Autowired // Conecta esta clase  con el repositorio
-            UsuariosRepository usuariosRepository; // Se crea una instancia del repositorio para poder usar los metodos de jpa
+    @Autowired // Conecta esta clase  con el repositorio, se hace la inyeccion de dependencias
+    UsuariosRepository usuariosRepository; // Se crea una instancia del repositorio para poder usar los metodos de jpa
 
 
     // Metodo que retornará la lista de Usuarios usuando metodo el metodo findAll() heredado de jpa con usuarioRepository

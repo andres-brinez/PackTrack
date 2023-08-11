@@ -11,7 +11,7 @@
         <h1>Historial de Usuarios</h1>
 
         <!-- Redirecciona a un servicio, por lo que se usa @{}  -->
-        <a href="" class="ver">Ver</a>
+
         <a th:href="@{crearUsuario}" class="crear">Crear</a>
 
         <table>
@@ -21,6 +21,7 @@
                 <th>Nombre</th>
                 <th>correo</th>
                 <th>Rol</th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -35,6 +36,7 @@
                 <td th:text="${usuario.rol}"></td>
                 <td><a th:href="@{editarUsuario/{numeroIdentificacion}(numeroIdentificacion=${usuario.numeroIdentificacion})}" class="editar">Editar</a></td>
                 <td><a th:href="@{eliminarUsuario/{numeroIdentificacion}(numeroIdentificacion=${usuario.numeroIdentificacion})}" class="eliminar">Eliminar</a></td>
+                <td> <a th:href="@{verUsuario/{id}(id=${usuario.numeroIdentificacion})}" class="ver">Ver</a></td>
             </tr>
 
         </table>
@@ -81,6 +83,9 @@
                 }
 
             };
+
+            eliminarUsuario();
+
         </script>
 
     </body>

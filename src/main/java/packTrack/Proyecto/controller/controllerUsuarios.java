@@ -80,4 +80,16 @@ public class controllerUsuarios {
         return "redirect:/historialUsuarios";
     }
 
+    @GetMapping("/verUsuario/{id}")
+    public String verUsuaruio(@PathVariable long id,Model model) {
+        Usuario usuario=usuariosService.getUsuarioById(id);
+
+        model.addAttribute("usuario",usuario);
+
+        return  "usuarios/verUsuario";
+
+    }
+
+
+
 }
