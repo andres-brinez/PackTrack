@@ -15,7 +15,7 @@ import packTrack.Proyecto.services.UsuariosService;
 import java.util.List;
 
 @Controller // marca la clase como un controlador  para manejar las solicitudes HTTP y enviar respuestas tipo html
-public class controllerUsuarios {
+public class ControllerUsuarios {
     @Autowired // Conecta esta clase  con el servicio
     UsuariosService usuariosService; // Se crea una instancia del servicio para poder usar los metodos de jpa
 
