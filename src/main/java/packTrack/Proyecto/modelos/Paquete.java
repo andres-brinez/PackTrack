@@ -67,9 +67,18 @@ public Paquete(Usuario usuario, Usuario empleado, String nombre, String origen, 
             return "Dimensionado";
         }
 
-        // cuales serian los valores de peso, altura, ancho y largo para que sea dimensionado?
+    }
 
+    // generar la clasificacion recibiendo los valores de peso, altura, ancho y largo, el metodo debe retornar un string con la clasificacion y se llama actualizarClasificacio
 
+    public void actualizarClasificacion(int peso, int altura, int ancho, int largo) {
+        if (peso <= 10 && altura <= 10 && ancho <= 20 && largo <= 30) {
+            this.clasificacion = "Básico";
+        } else if ((peso >= 10&& peso < 100 ) && (altura >= 30 && altura<80) && (ancho >= 40 && ancho<90) && (largo >= 50 && largo<100)) {
+            this.clasificacion = "Estándar";
+        } else {
+            this.clasificacion = "Dimensionado";
+        }
     }
 
     // Getters y Setters
