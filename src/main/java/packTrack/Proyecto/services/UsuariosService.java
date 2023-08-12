@@ -54,4 +54,11 @@ public class UsuariosService {
         }
         return false;
     }
+
+    // obtener empleados
+    public List<Usuario> getEmpleados(){
+
+        List<Usuario> empleados = usuariosRepository.findByRol("Empleado");
+        return empleados;
+    }
 }
