@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import packTrack.Proyecto.modelos.Paquete;
@@ -44,6 +45,10 @@ public class ControllerPaquetes {
 
     @PostMapping("/guardarPaquete")
     public String guardarPaquete(Paquete paquete, RedirectAttributes redirectAttributes){
+
+        String clasificacion = paquete.generarClasificacion(); // Generar la clasificación del paquete antes de guardarlo
+        System.out.println("Clasificación: " + clasificacion);
+
         if(paquetesService.saveOrUpdatePaquete(paquete)== true) {
             redirectAttributes.addFlashAttribute("mensaje", "saveOk");
             return "redirect:/paquetes";
@@ -51,6 +56,13 @@ public class ControllerPaquetes {
         redirectAttributes.addFlashAttribute("mensaje", "saveError");
         return "redirect:/crearPaquete";
 
+    }
+
+    @GetMapping("verPaquete/{id}")
+    public  String verPaquete(@PathVariable long id, Model model){
+        Paquete paquete = paquetesService.getPaqueteById(id);
+        model.addAttribute("paquete", paquete);
+        return "/paquetes/verPaquete";
     }
 
 
