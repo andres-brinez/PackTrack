@@ -33,7 +33,7 @@
                 <td th:text="${paquete.id}"></td>
                 <td th:text="${paquete.nombre}"></td>
                 <td th:text="${paquete.estado}"></td>
-                <td th:text="${paquete.empleadoResponsable}"></td>
+                <td th:text="${paquete.empleado.nombre}"></td>
 
                 <td><a th:href="@{editarPaquete/{id}(id=${paquete.id})}" class="editar">Editar</a></td>
                 <td><a th:href="@{eliminarPaquete/{id}(id=${paquete.id})}" class="eliminar">Eliminar</a></td>
