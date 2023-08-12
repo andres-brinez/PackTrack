@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Edición de Paquete</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Edición Paquete</h1>
+<a href="javascript:history.go(-1)"> Atrás</a>
+
+
+<form th:action=@{/actualizarPaquete} th:object="${paquete}" method="post">
+
+    <p>ID <input readonly th:field="*{id}"/></p>
+    <p>Nombre: <input type="text" th:field="*{nombre}"/></p>
+    <p>Cantidad: <input type="text" th:field="*{cantidad}"/></p>
+    <p>Valor Declarado: <input type="text" th:field="*{valorDeclarado}"/></p>
+    <p>Origen: <input type="text" th:field="*{origen}"/></p>
+    <p>Peso: <input type="text" th:field="*{peso}"/></p>
+    <p>Ancho: <input type="text" th:field="*{ancho}"/></p>
+    <p>Longitud: <input type="text" th:field="*{largo}"/></p>
+    <p>Altura: <input type="text" th:field="*{altura}"/></p>
+    <p>Descripción: <input type="text" th:field="*{descripcion}"/></p>
+    <p>Estado: <input type="text" th:field="*{estado}" readonly/></p>
+    <p>Empleado responsable: <input type="text" th:field="*{empleado.nombre}"/></p>
+    <select id="empleadoResponsable" name="empleadoResponsable" th:field="*{empleado}" required="required">
+        <option th:each="empleado : ${listaEmpleados}" th:value="${empleado.numeroIdentificacion}" th:text="${empleado.nombre}"></option>
+    </select>
+    <p>Fecha de creación: <input type="text" th:field="*{createdAt}" readonly/></p>
+    <p>Remitente: <input type="text" th:field="*{usuario}" readonly/></p>
+    <p>Clasificación: <input type="text" th:field="*{clasificacion}" readonly/></p>
+
+
+    <button type="submit">Guardar Cambios</button>
+</form>
+</body>
+</html>
