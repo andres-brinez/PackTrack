@@ -89,6 +89,16 @@ public class ControllerPaquetes {
         return "redirect:/editarPaquete/" + paquete.getId();
     }
 
+    @GetMapping("eliminarPaquete/{id}")
+    public String eliminarPaquete(@PathVariable long id, RedirectAttributes redirectAttributes){
+        if(paquetesService.deletePaquete(id)){
+            redirectAttributes.addFlashAttribute("mensaje", "deleteOk");
+            return "redirect:/paquetes";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+        return "redirect:/paquetes";
+    }
+
 
 
 
