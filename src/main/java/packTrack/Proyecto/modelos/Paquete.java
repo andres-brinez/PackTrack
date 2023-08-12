@@ -35,6 +35,8 @@ public class Paquete {
     private Date createdAt;
 
     public Paquete() {
+        this.estado = "Registrado";
+        this.createdAt = Date.valueOf(LocalDate.now()); // Obtener la fecha actual
     }
 
 public Paquete(Usuario usuario, Usuario empleado, String nombre, String origen, String descripcion, int cantidad, int peso, int altura, int ancho, int largo, float valorDeclarado) {
@@ -53,31 +55,24 @@ public Paquete(Usuario usuario, Usuario empleado, String nombre, String origen, 
 
         this.createdAt = Date.valueOf(LocalDate.now());; // Obtener la fecha actual
 
-        // Todo: Convertir la fecha actual en el formato deseado para mostrarlo en la vista
-        /**
-         * Crea un objeto DateTimeFormatter para formatear la fecha: DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-         * Convierte la fecha en formato java.sql.Date a una cadena de texto con el formato deseado: String fechaFormateada = fechaActual.toLocalDate().format(formatter);
-          */
-
-    this.estado = "Registrado";
-        this.clasificacion = generarClasificacion();
-
     }
 
     // Método para generar la clasificación del paquete
     public String generarClasificacion() {
         if (peso <= 2 && altura <= 10 && ancho <= 20 && largo <= 30) {
             return "Básico";
-        } else if (peso <= 10 && altura <= 30 && ancho <= 40 && largo <= 50) {
+        } else if ((peso >= 10&& peso < 100 ) && (altura >= 30 && altura<80) && (ancho >= 40 && ancho<90) && (largo >= 50 && largo<100)) {
             return "Estándar";
         } else {
             return "Dimensionado";
         }
+
+        // cuales serian los valores de peso, altura, ancho y largo para que sea dimensionado?
+
+
     }
 
     // Getters y Setters
-
-
     public long getId() {
         return id;
     }
