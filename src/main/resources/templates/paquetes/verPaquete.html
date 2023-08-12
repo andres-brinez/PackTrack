@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+      <meta charset="UTF-8">
+      <title>ver Paquete</title>
+
+  </head>
+  <body>
+
+  <a href="javascript:history.go(-1)"> Atrás</a>
+
+  <h1>Información paquete</h1>
+
+
+    <div class="containerInformation" th:object="${paquete}">
+        <div class="information">
+
+            <p>Nombre: <span th:text="${paquete.nombre}"></span></p>
+            <p>Id: <span th:text="${paquete.id}"></span></p>
+            <p>Cantidad: <span th:text="${paquete.cantidad}"></span></p>
+            <p>Valor Declarado: <span th:text="${paquete.valorDeclarado}"></span></p>
+            <p>Origen: <span th:text="${paquete.origen}"></span></p>
+            <p>Peso: <span th:text="${paquete.peso}"></span></p>
+            <p>Ancho: <span th:text="${paquete.ancho}"></span></p>
+            <p>Longitud: <span th:text="${paquete.largo}"></span></p>
+            <p>Altura: <span th:text="${paquete.altura}"></span></p>
+            <p>Descripción: <span th:text="${paquete.descripcion}"></span></p>
+            <p>Estado: <span th:text="${paquete.estado}"></span></p>
+            <p>Empleado responsable: <span th:text="${paquete.empleado.nombre}"></span></p>
+            <p>Fecha de creación: <span th:text="${paquete.createdAt}"></span></p>
+            <p>Remitente: <span th:text="${paquete.usuario}"></span></p>
+            <p>Clasificación: <span th:text="${paquete.clasificacion}"></span></p>
+
+
+        </div>
+    </div>
+
+  </body>
+</html>
