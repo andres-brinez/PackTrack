@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear paquete</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/historialpaquetes.css}">
+</head>
+<body>
+
+<h1>Crear paquete</h1>
+
+<a href="javascript:history.go(-1)"> Atrás</a>
+<!-- El atributo th:action es la ruta del servicio que se va a consumir -->
+<!-- El atributo th:object es el objeto que se recibe desde  el controlador  y el que se envia-->
+
+<form th:action="@{guardarPaquete}" th:object="${paquete}" method="post">
+
+
+    <!--th:field="*{nombreCampo}"  indica en  que campo del objeto(modelo) debe guarder el dato -->
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" th:field="*{nombre}" id="nombre" name="nombre" required><br>
+
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" th:field="*{cantidad}" id="cantidad" name="cantidad" required><br>
+
+    <label for="valorDeclarado">Valor Declarado:</label>
+    <input type="number"    th:field="*{valorDeclarado}" id="valorDeclarado" name="valorDeclarado" required><br>
+
+    <label for="origen">Origen:</label>
+    <input type="text" th:field="*{origen}" id="origen" name="origen" required><br>
+
+    <label for="peso">Peso:</label>
+    <input type="number" th:field="*{peso}" id="peso" name="peso" required><br>
+
+    <label for="ancho">Ancho:</label>
+    <input type="number" th:field="*{ancho}" id="ancho" name="ancho" required><br>
+
+    <label for="longitud">Longitud:</label>
+    <input type="number" th:field="*{largo}" id="longitud" name="longitud" required><br>
+
+    <label for="altura">Altura:</label>
+    <input type="number" th:field="*{altura}" id="altura" name="altura" required><br>
+
+
+    <label for="descripcion">Descripción:</label>
+    <textarea type="text" th:field="*{descripcion}" id="descripcion" name="descripcion" required></textarea>
+
+    <label for="empleadoResponsable">Empleado responsable</label>
+    <select id="empleadoResponsable" name="empleadoResponsable" th:field="*{empleado}" required="required">
+        <option th:each="empleado : ${listaEmpleados}" th:value="${empleado.numeroIdentificacion}" th:text="${empleado.nombre}"></option>
+    </select>
+
+
+
+    <!-- En el caso en el no se haya guardado el nombre sino el id se debe hacer un option por cada opcion
+    <option th:value=1>Empleado 1 </option>
+<option th:value=2>Empleado 2 </option>
+
+    -->
+
+
+    <button type="submit">Guardar</button>
+
+
+
+    <!--th:if="${#fields.hasErrors('nombreCampo')}"  indica que si el campo tiene errores muestre el mensaje de error-->
+
+</form>
+
+</body>
+</html>
