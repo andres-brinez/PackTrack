@@ -47,7 +47,7 @@ public class ControllerPaquetes {
     public String guardarPaquete(Paquete paquete, RedirectAttributes redirectAttributes){
 
         String clasificacion = paquete.generarClasificacion(); // Generar la clasificación del paquete antes de guardarlo
-        System.out.println("Clasificación: " + clasificacion);
+        paquete.setClasificacion(clasificacion);
 
         if(paquetesService.saveOrUpdatePaquete(paquete)== true) {
             redirectAttributes.addFlashAttribute("mensaje", "saveOk");
@@ -63,6 +63,30 @@ public class ControllerPaquetes {
         Paquete paquete = paquetesService.getPaqueteById(id);
         model.addAttribute("paquete", paquete);
         return "/paquetes/verPaquete";
+    }
+
+
+    @GetMapping("editarPaquete/{id}")
+    public  String editarPaquete(@PathVariable long id, Model model){
+        Paquete paquete = paquetesService.getPaqueteById(id);
+        List< Usuario> listaEmpleados = usuariosService.getEmpleados();
+        model.addAttribute("listaEmpleados", listaEmpleados);
+        model.addAttribute("paquete", paquete);
+        return "/paquetes/editarPaquete";
+    }
+
+    @PostMapping("/actualizarPaquete")
+    public String actualizarPaquete(Paquete paquete,RedirectAttributes redirectAttributes) {
+
+        paquete.actualizarClasificacion(paquete.getPeso(),paquete.getAltura(), paquete.getAncho(), paquete.getLargo()); // Actualizar la clasificación del paquete antes de guardarlo
+
+        if (paquetesService.saveOrUpdatePaquete(paquete)) {
+            redirectAttributes.addFlashAttribute("mensaje", "updateOk");
+            return "redirect:/paquetes";
+        }
+
+        redirectAttributes.addFlashAttribute("mensaje", "updateError");
+        return "redirect:/editarPaquete/" + paquete.getId();
     }
 
 
