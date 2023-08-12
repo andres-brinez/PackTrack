@@ -26,7 +26,7 @@
                 <th></th>
             </tr>
 
-            <!--Iteramos la lista de usuarios  que viene desde el controlador como un objeto model -->
+            <!--Iteramos la lista de paquetes  que viene desde el controlador como un objeto model -->
             <tr th:each="paquete : ${listaPaquetes}">
 
                 <td> <input type="checkbox" id="cbox1" value=th:value="${paquete.id}"> </td>
@@ -44,19 +44,19 @@
 
         <script th:inline="javaScript">
 
-            function eliminarUsuario() {
+            function eliminarpaquete() {
                 var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
                 var ids = [];
                 for (var i = 0; i < checkboxes.length; i++) {
                     ids.push(checkboxes[i].value);
                 }
                 if (ids.length > 0) {
-                    var r = confirm("¿Está seguro que desea eliminar los usuarios seleccionados?");
+                    var r = confirm("¿Está seguro que desea eliminar los paquetes seleccionados?");
                     if (r == true) {
-                        window.location.href = "/eliminarUsuarios/" + ids;
+                        window.location.href = "/eliminarpaquetes/" + ids;
                     }
                 } else {
-                    alert("Debe seleccionar al menos un usuario para eliminar");
+                    alert("Debe seleccionar al menos un paquete para eliminar");
                 }
             }
 
@@ -68,16 +68,16 @@
                 if (mensajeRecibido != "") {
 
                     if (mensajeRecibido == "saveOk") {
-                        mensajeMostrar = "El usuario se ha creado correctamente";
+                        mensajeMostrar = "El paquete se ha creado correctamente";
                     }
                     else if (mensajeRecibido == "updateOk") {
-                        mensajeMostrar = "El usuario se ha actualizado correctamente";
+                        mensajeMostrar = "El paquete se ha actualizado correctamente";
                     }
                     else if (mensajeRecibido == "deleteOk") {
-                        mensajeMostrar = "El usuario se ha eliminado correctamente";
+                        mensajeMostrar = "El paquete se ha eliminado correctamente";
                     }
                     else if (mensajeRecibido == "deleteError"){
-                        mensajeMostrar = "El usuario no se pudo eliminar";
+                        mensajeMostrar = "El paquete no se pudo eliminar";
                     }
 
                     alert(mensajeMostrar);
@@ -85,7 +85,7 @@
 
             };
 
-            eliminarUsuario();
+            eliminarpaquete();
 
         </script>
 
