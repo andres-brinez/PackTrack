@@ -38,6 +38,12 @@
 
     </select><br>
 
+    <label for="estado">Estado:</label>
+    <select id="estado" name="estado"  th:field="*{estado}" required>
+        <option value="True">Activo</option>
+        <option value="false">Inactivo</option>
+    </select><br>
+
     <label for="direccion">Dirección:</label>
     <input type="text" id="direccion" name="direccion"  th:field="*{direccion}" ><br>
 
