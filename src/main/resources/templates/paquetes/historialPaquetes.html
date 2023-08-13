@@ -10,6 +10,9 @@
 
         <h1>Paquetes</h1>
 
+        <nav th:replace="components/navbar :: nav_bar"></nav>
+
+
         <!-- Redirecciona a un servicio, por lo que se usa @{}  -->
 
         <a th:href="@{crearPaquete}" class="crear">Crear</a>
