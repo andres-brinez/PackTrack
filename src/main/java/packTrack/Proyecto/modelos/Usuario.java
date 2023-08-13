@@ -21,10 +21,14 @@ public class Usuario {
     private Date createdAt;
     private String descripcion;
 
+    private Boolean estado;
+
 
     public Usuario() {
 
         this.createdAt = Date.valueOf(java.time.LocalDate.now()); // Obtener la fecha actual
+        this.estado = true;
+
     }
 
     public Usuario(long numeroIdentificacion, String nombre, String password,String rol) {
@@ -105,5 +109,13 @@ public class Usuario {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 }
