@@ -11,64 +11,56 @@
 
   <h1>Información usuario</h1>
 
-
     <div class="containerInformation" th:object="${usuario}">
 
-<!--        <p  th:text="${usuario.nombre}"></p>
+        <p>
+            <span>Nombre</span>
+            <span th:text="${usuario.nombre}"></span>
+        </p>
 
-        <label for="nombre">nombre</label>
-        <input type="text" id="nombre" th:field="*{usuario.nombre}" >
+        <p>
+            <span>Numero de identificación</span>
+            <span th:text="${usuario.numeroIdentificacion}"></span>
+        </p>
 
+        <p>
+            <span>Correo</span>
+            <span th:text="${usuario.correo}"></span>
+        </p>
 
+        <p>
+            <span>Telefono</span>
+            <span th:text="${usuario.telefono}"></span>
+        </p>
 
-        <p  th:text="${usuario.numeroIdentificacion}"></p>
-        <p  th:text="${usuario.rol}"></p>
-        <p  th:text="${usuario.correo}"></p>
-        <p  th:text="${usuario.telefono}"></p>
-        <p  th:text="${usuario.direccion}"></p>
-        <p  th:text="${usuario.createdAt}"></p>
-        <p  th:text="${usuario.descripcion}"></p>-->
+        <p>
+            <span>Rol</span>
+            <span th:text="${usuario.rol}"></span>
+        </p>
 
-
-        <form  th:object="${usuario}" method="Get">
-
-
-            <input type="number" minlength="5"  id="numeroIdentificacion" name="numeroIdentificacion"  th:field="*{numeroIdentificacion}"  readonly><br>
-
-            <p th:text="${usuario.nombre}"></p>
-            <p th:text="${usuario.telefono}"></p>
-            <p> Telefono</p>
-
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre"  th:field="*{nombre}" required ><br>
-
-            <label for="correo">Correo:</label>
-            <input type="email" id="correo" name="correo"  th:field="*{correo}" required><br>
-
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono"  th:field="*{telefono}"><br>
-
-            <label for="rol">Rol:</label>
-
-            <select id="rol" name="rol"  th:field="*{rol}" required>
-                <!-- <option th:each="rol : ${listaRoles}" th:value="${rol}" th:text="${rol}"></option> -->
-                <option value="Usuario">Usuario</option>
-                <option value="Empleado">Empleado</option>
-                <option value="Administrador">Administrador</option>
-
-            </select><br>
-
-            <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" name="direccion"  th:field="*{direccion}" ><br>
-
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion"  rows="4" cols="50"   th:field="*{descripcion}"></textarea><br>
-
-            <input type="tel" id="password" name="password"  th:field="*{password}" hidden="hidden"><br>
+        <p>
+            <span>Fecha de creación</span>
+            <span th:text="${#dates.format(usuario.createdAt, 'dd-MM-yyyy HH:mm')}"></span>
+        <p>
 
 
+            <span>Estado</span>
+            <!-- hacer if  por si el estado es false  poner Inactivo y y si es true Activo-->
 
-        </form>
+            <span th:if="${usuario.estado==true}">Activo</span>
+            <span th:if="${usuario.estado==false}">Inactivo</span>
+
+        </p>
+
+        <p>
+            <span>Dirección</span>
+            <span th:text="${usuario.direccion}"></span>
+        </p>
+
+        <p>
+            <span>Descripción</span>
+            <span th:text="${usuario.descripcion}"></span>
+        </p>
     </div>
 
   </body>
