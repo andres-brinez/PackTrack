@@ -21,7 +21,7 @@ public class ControllerUsuarios {
 
     //? SERVICIOS REST
 
-    @GetMapping({"/", "/historialUsuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
+    @GetMapping({"/Usuarios", "/historialUsuarios"}) // {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
     public String viewUsuarios(@ModelAttribute("mensaje") String mensajeRecibido, Model model) {
         // @ModelAttribute("mensaje") String mensaje: Se usa para obtener el mensaje enviado por el metodo que redirecciona
         List<Usuario> listaUsuarios = usuariosService.getAllUsuarios(); // Se obtiene la lista de usuarios usando el metodo del servicio que deuelve la lista de usuarios
@@ -54,6 +54,7 @@ public class ControllerUsuarios {
     //@PathVariable se usa para obtener el valor de la variable en la ruta
     public String editarUsuario(Model model, @PathVariable long numeroIdentificacion,@ModelAttribute("mensaje") String mensajeRecibido) {
         Usuario usuario = usuariosService.getUsuarioById(numeroIdentificacion);
+
         model.addAttribute("usuario", usuario);
         model.addAttribute("mensaje", mensajeRecibido); // Se agrega el mensaje al modelo para poder usarlo en la vista
         return "usuarios/editarUsuario";
@@ -83,7 +84,6 @@ public class ControllerUsuarios {
     @GetMapping("/verUsuario/{id}")
     public String verUsuaruio(@PathVariable long id,Model model) {
         Usuario usuario=usuariosService.getUsuarioById(id);
-
         model.addAttribute("usuario",usuario);
 
         return  "usuarios/verUsuario";
