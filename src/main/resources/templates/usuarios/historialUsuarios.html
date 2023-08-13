@@ -10,6 +10,9 @@
 
         <h1>Historial de Usuarios</h1>
 
+        <nav th:replace="components/navbar :: nav_bar"></nav>
+
+
         <!-- Redirecciona a un servicio, por lo que se usa @{}  -->
 
         <a th:href="@{crearUsuario}" class="crear">Crear</a>
