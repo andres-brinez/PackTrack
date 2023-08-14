@@ -1,6 +1,9 @@
 package packTrack.Proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +44,10 @@ public class ControllerUsuarios {
     // Para guardar el usuario se usa el metodo del servicio que guarda el usuario en la base de datos
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(Usuario usuario, RedirectAttributes redirectAttributes) {
+
+        // Encriptar contraseña
+        String passwordEncriptado = passwordEncoder().encode(usuario.getPassword());
+        usuario.setPassword(passwordEncriptado);
 
         if (usuariosService.saveOrUpdateUsuario(usuario)) { // Si el usuario se guarda correctamente
             redirectAttributes.addFlashAttribute("mensaje", "saveOk"); // Se agrega un mensaje al modelo para poder usarlo en la vista
@@ -89,6 +96,20 @@ public class ControllerUsuarios {
         return  "usuarios/verUsuario";
 
     }
+
+    // Metodo Encriptar contraseña
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+
+
+
+
+
 
 
 
