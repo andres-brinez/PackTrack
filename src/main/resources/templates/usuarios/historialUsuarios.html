@@ -24,6 +24,7 @@
                 <th>Nombre</th>
                 <th>correo</th>
                 <th>Rol</th>
+                <th>Estado</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -37,6 +38,8 @@
                 <td th:text="${usuario.nombre}"></td>
                 <td th:text="${usuario.correo}"></td>
                 <td th:text="${usuario.rol}"></td>
+                <td th:if="${usuario.estado==true}">Activo</td>
+                <td th:if="${usuario.estado==false}">Inactivo</td>
                 <td><a th:href="@{editarUsuario/{numeroIdentificacion}(numeroIdentificacion=${usuario.numeroIdentificacion})}" class="editar">Editar</a></td>
                 <td><a th:href="@{eliminarUsuario/{numeroIdentificacion}(numeroIdentificacion=${usuario.numeroIdentificacion})}" class="eliminar">Eliminar</a></td>
                 <td> <a th:href="@{verUsuario/{id}(id=${usuario.numeroIdentificacion})}" class="ver">Ver</a></td>
