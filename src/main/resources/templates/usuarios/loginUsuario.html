@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login de Usuario</title>
+</head>
+<body>
+<h1>Login de Usuario</h1>
+
+<form th:action="@{login}" th:object="${usuario}" method="post">
+
+
+    <label for="documento">Número de Documento:</label>
+    <input type="text" th:field="*{numeroIdentificacion}" id="documento" name="documento" required pattern="[0-9]{5,}"><br>
+
+    <label for="contrasena">Contraseña</label>
+    <input type="password" th:field="*{password}"  id="contrasena" name="contrasena" required pattern=".{5,}"><br>
+
+    <input type="submit" value="Envíar">
+
+
+</form>
+    <script th:inline="javaScript">
+                    window.onload = function () {
+
+                let mensajeRecibido = [[${mensaje}]]; <!--Obtenemos el mensaje que viene desde el controlador-->
+                let mensajeMostrar = "";
+
+                if (mensajeRecibido != "") {
+
+                    if (mensajeRecibido == "saveOk") {
+                        mensajeMostrar = "El usuario se ha registrado correctamente";
+                    }
+                    else if (mensajeRecibido == "saveError") {
+                        mensajeMostrar = "Error";
+                    }
+
+
+                    alert(mensajeMostrar);
+                }
+
+            };
+
+    </script>
+</body>
+</html>
