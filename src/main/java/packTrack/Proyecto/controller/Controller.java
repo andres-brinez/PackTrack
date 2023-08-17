@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import packTrack.Proyecto.modelos.Usuario;
 import packTrack.Proyecto.services.UsuariosService;
@@ -51,13 +52,12 @@ public class Controller {
     }
 
     @GetMapping("/login")
-    public String login(Model model, @ModelAttribute("mensaje") String mensajeRecibido){
-
-        Usuario nuevoUsuario = new Usuario();
-        model.addAttribute("mensaje", mensajeRecibido); // Se agrega el mensaje al modelo para poder usarlo en la vista
-
-        return "/usuarios/loginUsuario"; // Se retorna el nombre de la vista
+    public String login(@RequestParam(name = "error", required = false) String error, Model model, @ModelAttribute("mensaje") String mensajeRecibido) // @RequestParam(name = "error", required = false) String error -> permite recibir un parametro por la url y guardarlo en la variable error
+    {
+        model.addAttribute("mensaje", mensajeRecibido); // Se agrega el mensaje que se recibe al modelo para poder usarlo en la vista
+        return "/usuarios/loginUsuario";
     }
+
 
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
