@@ -61,14 +61,12 @@ public class SecurityConfig  {
                                 // .antMatchers("/","/Home").permitAll() // todos los endpoints que empiecen con / o /Home son publicos y no requieren autenticacion
                                 .anyRequest().authenticated() // cualquier otro endpoint requiere autenticacion
                 )
-                //.formLogin(Customizer.withDefaults()) // permite el acceso a todos los usuarios
-
+                //.formLogin(Customizer.withDefaults()) // el login por defecto es el que viene por defecto de spring
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/login") // donde será la pagina de login, es decir la ruta de la pagina de login
                                 .permitAll() // permite el acceso a todos los usuarios
-                                // si hay algun error aparece esta url, y desde la plantilla se genera un error
-                                .failureUrl("/login?error=true")
+                                .failureUrl("/login?error=true")   // si hay algun error aparece esta url, y desde la plantilla se genera un error
                                 .defaultSuccessUrl("/Home", true) // si se inicia sesion correctamente se redirecciona a esta ruta
                                 // estos dos son los campos que se deben enviar en el formulario de login, por eso debe tener el nombre del input de cada uno
                                 .usernameParameter("numeroIdentificacion") // nombre del input del numero de identificacion
