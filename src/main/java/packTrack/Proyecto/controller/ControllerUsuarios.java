@@ -69,6 +69,10 @@ public class ControllerUsuarios {
 
     @PostMapping("/actualizarUsuario")
     public String actualizarUsuario(Usuario usuario,RedirectAttributes redirectAttributes) {
+        // encryptar contraseña
+        String passwordEncriptado = passwordEncoder().encode(usuario.getPassword());
+        usuario.setPassword(passwordEncriptado);
+
         if (usuariosService.saveOrUpdateUsuario(usuario)) {
             redirectAttributes.addFlashAttribute("mensaje", "updateOk");
             return "redirect:/historialUsuarios";
@@ -103,11 +107,6 @@ public class ControllerUsuarios {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
-
-
-
 
 
 
