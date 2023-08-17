@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:with="sesion=${session}"> <!-- Esta línea establece un alias para la sesión de la solicitud actual llamado "session", que se puede utilizar para acceder a los atributos de la sesión en la plantilla HTML.-->
 <head>
     <meta charset="UTF-8">
     <title>Login de Usuario</title>
@@ -19,9 +19,14 @@
 
     <div th:if="${param.error}"> <!--Si el parámetro error existe en la url, mostramos el mensaje de error-->
         <div class="alert alert-danger" role="alert">
-            Los datos de inicio de sesión son incorrectos. Por favor, inténtalo de nuevo.
+            Credenciales de inicio de sesión incorrectas
         </div>
     </div>
+
+    <div th:if="${param.deshabilitado}" class="alert alert-danger" role="alert"> <!--Si el parámetro deshabilitado existe en la url, mostramos el mensaje de error-->
+        <span th:text="${sesion.mensaje}"></span> <!--Obtenemos el mensaje que viene desde la sesión de la solicitud actual-->
+    </div>
+
 
     <input type="submit" value="Envíar">
 
