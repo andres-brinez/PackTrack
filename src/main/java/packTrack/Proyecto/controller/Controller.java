@@ -1,6 +1,7 @@
 package packTrack.Proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class Controller {
     public String index(){
         return "index";
     }
+
 
     @GetMapping("/registro")
     public String registro(Model model, @ModelAttribute("mensaje") String mensajeRecibido){
@@ -52,7 +54,6 @@ public class Controller {
     public String login(Model model, @ModelAttribute("mensaje") String mensajeRecibido){
 
         Usuario nuevoUsuario = new Usuario();
-        model.addAttribute("usuario", nuevoUsuario); //se guarda un objeto en el  modelo para poder usarlo en la vista y guardar valores
         model.addAttribute("mensaje", mensajeRecibido); // Se agrega el mensaje al modelo para poder usarlo en la vista
 
         return "/usuarios/loginUsuario"; // Se retorna el nombre de la vista
@@ -61,4 +62,6 @@ public class Controller {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }
