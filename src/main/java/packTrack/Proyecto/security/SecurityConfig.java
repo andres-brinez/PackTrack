@@ -3,6 +3,7 @@ package packTrack.Proyecto.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,8 +21,7 @@ public class SecurityConfig  {
     private DataSource dataSource; // copia virtual de la base de datos para poder hacer consultas y no ir directamente a la base de datos, esto es más eficiente
 
     // Cuando el usuario intente iniciar sesión se debe hacer una consulta a la base de datos para verificar que el usuario exista
-
-    //? Validar la existencia del usuario, codificar la contraseña y verificar que coincida con la contraseña encriptada de la base de datos
+    //? Validar la existencia del usuario, codificar la contraseña y verificar que coincida con la contraseña encriptada de la base de datos ( hace la autenticacion de los usuarios)
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception
     {
@@ -61,18 +61,31 @@ public class SecurityConfig  {
                                 // .antMatchers("/","/Home").permitAll() // todos los endpoints que empiecen con / o /Home son publicos y no requieren autenticacion
                                 .anyRequest().authenticated() // cualquier otro endpoint requiere autenticacion
                 )
+
                 //.formLogin(Customizer.withDefaults()) // el login por defecto es el que viene por defecto de spring
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/login") // donde será la pagina de login, es decir la ruta de la pagina de login
                                 .permitAll() // permite el acceso a todos los usuarios
-                                .failureUrl("/login?error=true")   // si hay algun error aparece esta url, y desde la plantilla se genera un error
+                                .failureHandler((request, response, exception) -> {
+                                    // en el caso de que el usuario este deshabilitado
+                                    if (exception instanceof DisabledException) { // si la excepcion es de tipo DisabledException es porque el usuario esta deshabilitado
+                                        request.getSession().setAttribute("mensaje", "Usuario deshabilitado"); //  establece un atributo llamado "mensaje" en la sesión de la solicitud actual.
+                                        response.sendRedirect("/login?deshabilitado=true");
+                                    }
+                                    // si hay algun error aparece esta url, y desde la plantilla se genera un error
+                                    else {
+                                        //request.getSession().setAttribute("mensaje", "Credenciales de inicio de sesión incorrectas"); // se comentó para no enviarla a la plantilla y ver otra forma de generar mensajes
+                                        response.sendRedirect("/login?error=true");
+                                    }
+                                })
+
                                 .defaultSuccessUrl("/Home", true) // si se inicia sesion correctamente se redirecciona a esta ruta
                                 // estos dos son los campos que se deben enviar en el formulario de login, por eso debe tener el nombre del input de cada uno
                                 .usernameParameter("numeroIdentificacion") // nombre del input del numero de identificacion
                                 .passwordParameter("password")
-                )
 
+                )
                 /*
                   .logout(logout ->
                           logout
