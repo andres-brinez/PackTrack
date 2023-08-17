@@ -17,6 +17,12 @@
     <label for="contrasena">Contraseña</label>
     <input type="password"  id="contrasena" name="password" required><br>
 
+    <div th:if="${param.error}"> <!--Si el parámetro error existe en la url, mostramos el mensaje de error-->
+        <div class="alert alert-danger" role="alert">
+            Los datos de inicio de sesión son incorrectos. Por favor, inténtalo de nuevo.
+        </div>
+    </div>
+
     <input type="submit" value="Envíar">
 
 
