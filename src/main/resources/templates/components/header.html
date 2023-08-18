@@ -1,7 +1,8 @@
 
-// Header con fragment
 
 <header th:fragment="Header" class="header">
+
+    <p th:text="${nombreUsuario}"></p>
 
     <a th:href="@{/logout}">Salir</a>
 
