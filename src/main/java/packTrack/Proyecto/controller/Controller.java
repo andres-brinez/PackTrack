@@ -1,14 +1,12 @@
 package packTrack.Proyecto.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import packTrack.Proyecto.modelos.Usuario;
 import packTrack.Proyecto.services.UsuariosService;
@@ -19,11 +17,19 @@ public class Controller {
     @Autowired
     UsuariosService usuariosService;
 
-    @GetMapping({"/","/Home"})// {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
-    public String index(){
+    @GetMapping({"/","/home"})// {ruta1, ruta2,..} maneja varias rutas para el mismo metodo (servicio)
+    public String index(Model model, HttpServletRequest request) {
+
+        // request es un objeto que contiene la informacion de la peticion que se hace al servidor
+        //System.out.println("Usuario: " + request.getUserPrincipal().getName()); // obtener el nombre del usuario que inicio sesion
+        Long idUsuario =Long.parseLong(request.getUserPrincipal().getName()); // obtener el id del usuario que inició sesion en este el lo toma como el nombre
+
+        Usuario usuario = usuariosService.getUsuarioById((idUsuario)); // obtener el usuario que inicio sesion
+
+        model.addAttribute("nombreUsuario", usuario.getNombre()); // se agrega un atributo al modelo para poder usarlo en la vista
+
         return "index";
     }
-
 
     @GetMapping("/registro")
     public String registro(Model model, @ModelAttribute("mensaje") String mensajeRecibido){
@@ -58,7 +64,14 @@ public class Controller {
         return "/usuarios/loginUsuario";
     }
 
+    // Controlador que lleva  al template de no autorizado
+    @RequestMapping("/accesoDenegado")
+    public String denegado(){
+        return "accessDenied";
+    }
 
+
+    // Encriptar contraseña
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
