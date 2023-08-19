@@ -61,12 +61,11 @@ public class SecurityConfig  {
                                 // Parece que los roles se deben Guardar con "ROLE_" + rol
                                 .requestMatchers("/historialUsuarios").hasRole("ADMIN") // el enpoint /historialUsuarios requiere autenticacion y el rol de administrador
                                 .requestMatchers("/Home").hasAnyRole("Administrador","Usuario","Empleado") // el enpoint /Home requiere autenticacion y el rol de administrador, usuario y empleado
-                                .requestMatchers("/css/**").permitAll()// los archivos css son publicos y no requieren autenticacion
-                                .requestMatchers("/img/**").permitAll()
+                                .anyRequest().permitAll() // cualquier otra ruta es publica y no requiere autenticacion
                         // en el caso del que el usuario no tenga el rol se redirecciona a la pagina de acceso denegado
 
                 )
-                // en el caso de que haya un error con el rol
+                // en el caso de que el usuario no tenga el rol se redirecciona a la pagina de acceso denegado
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.accessDeniedHandler((request, response, accessDeniedException) ->
                                 response.sendRedirect("/accesoDenegado")
