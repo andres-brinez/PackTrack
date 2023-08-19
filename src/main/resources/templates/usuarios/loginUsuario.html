@@ -2,36 +2,59 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" th:with="sesion=${session}"> <!-- Esta línea establece un alias para la sesión de la solicitud actual llamado "session", que se puede utilizar para acceder a los atributos de la sesión en la plantilla HTML.-->
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{css/registroAndLogin.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <title>Login de Usuario</title>
 </head>
 <body>
-<h1>Login de Usuario</h1>
 
-<!--Es necesario poner el action y el post -->
-<form th:action="@{login}"  method="post">
-
-
-    <label for="numeroIdentificacion">Número de Documento:</label>
-    <input type="number"  id="numeroIdentificacion" name="numeroIdentificacion" required><br>
-
-    <label for="contrasena">Contraseña</label>
-    <input type="password"  id="contrasena" name="password" required><br>
-
-    <div th:if="${param.error}"> <!--Si el parámetro error existe en la url, mostramos el mensaje de error-->
-        <div class="alert alert-danger" role="alert">
-            Credenciales de inicio de sesión incorrectas
+    <header>
+        <div class="containerLogo">
+            <img th:src="@{img/logo1.png}" alt="Logo empresa">
+            <h1>PackTrack</h1>
         </div>
-    </div>
+        <p> ¿No tienes cuenta? <span> <a th:href="@{registro}">Create una</a> </span></p>
+    </header>
 
-    <div th:if="${param.deshabilitado}" class="alert alert-danger" role="alert"> <!--Si el parámetro deshabilitado existe en la url, mostramos el mensaje de error-->
-        <span th:text="${sesion.mensaje}"></span> <!--Obtenemos el mensaje que viene desde la sesión de la solicitud actual-->
-    </div>
+    <main>
+
+        <h2>¡Bienvenido de vuelta! </h2>
+
+        <p class="description">Por favor, inicia sesión para acceder a tu cuenta y gestionar tus envíos de manera rápida
+            y segura.
+        </p>
+
+        <!--Es necesario poner el action y el post -->
+        <form th:action="@{login}" method="post">
 
 
-    <input type="submit" value="Envíar">
+            <label for="numeroIdentificacion">Número de Documento</label>
+            <input type="number" id="numeroIdentificacion" name="numeroIdentificacion" required><br>
 
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" name="password" required><br>
 
-</form>
+            <div th:if="${param.error}"> <!--Si el parámetro error existe en la url, mostramos el mensaje de error-->
+                <div class="alertDanger" role="alert">
+                    Credenciales de inicio de sesión incorrectas
+                </div>
+            </div>
+
+            <div th:if="${param.deshabilitado}" class="alertDanger" role="alert">
+                <!--Si el parámetro deshabilitado existe en la url, mostramos el mensaje de error-->
+                <span th:text="${sesion.mensaje}"></span>
+                <!--Obtenemos el mensaje que viene desde la sesión de la solicitud actual-->
+            </div>
+
+            <button type="submit">Iniciar sesión</button>
+
+        </form>
+
+    </main>
     <script th:inline="javaScript">
                     window.onload = function () {
 
