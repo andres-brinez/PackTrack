@@ -5,8 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -16,7 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration //Indica que es una clase de configuracion y tiene metodos anotados con @Bean que retornan objetos que seran administrados por el contenedor de Spring
 @EnableWebSecurity //Habilita la seguridad web en una aplicacion Spring MVC
-public class SecurityConfig {
+public class SecurityConfig  {
 
     @Autowired
     private DataSource dataSource; // copia virtual de la base de datos para poder hacer consultas y no ir directamente a la base de datos, esto es más eficiente
@@ -62,8 +61,9 @@ public class SecurityConfig {
                                 // Parece que los roles se deben Guardar con "ROLE_" + rol
                                 .requestMatchers("/historialUsuarios").hasRole("ADMIN") // el enpoint /historialUsuarios requiere autenticacion y el rol de administrador
                                 .requestMatchers("/Home").hasAnyRole("Administrador","Usuario","Empleado") // el enpoint /Home requiere autenticacion y el rol de administrador, usuario y empleado
-                                .anyRequest().authenticated() // cualquier otro endpoint requiere autenticacion
-                                // en el caso del que el usuario no tenga el rol se redirecciona a la pagina de acceso denegado
+                                .requestMatchers("/css/**").permitAll()// los archivos css son publicos y no requieren autenticacion
+                                .requestMatchers("/img/**").permitAll()
+                        // en el caso del que el usuario no tenga el rol se redirecciona a la pagina de acceso denegado
 
                 )
                 // en el caso de que haya un error con el rol
@@ -101,8 +101,6 @@ public class SecurityConfig {
 
                 )
 
-
-
               .logout(logout ->
                   logout
                           .permitAll() // permite el acceso a todos los usuarios
@@ -113,7 +111,9 @@ public class SecurityConfig {
               )
 
                 .build();
+
     }
+
 
 
 }
