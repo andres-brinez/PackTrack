@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Registro de Usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{css/registroAndLogin.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Registro</title>
 </head>
+
 <body>
-<h1>Registro de Usuario</h1>
+<header>
+    <div class="containerLogo">
+        <img th:src="@{img/logo1.png}" alt="Logo empresa">
+        <h1>PackTrack</h1>
+    </div>
+    <p> ¿Tienes cuenta? <span> <a th:href="@{login}">Accede Ya </a> </span></p>
 
-<form th:action="@{registro/guardarUsuario}" th:object="${usuario}" method="post">
+</header>
+<main>
 
+    <h2>¡Bienvenido a nuestra plataforma! </h2>
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" th:field="*{nombre}" id="nombre" name="nombre" required><br>
+    <p class="description">Para comenzar a disfrutar de todos nuestros servicios, por favor completa el siguiente
+        formulario
+    </p>
 
-    <label for="documento">Número de Documento:</label>
-    <input type="text" th:field="*{numeroIdentificacion}" id="documento" name="documento" required pattern="[0-9]{5,}"><br>
+    <form th:action="@{registro/guardarUsuario}" th:object="${usuario}" method="post">
 
-    <label for="contrasena">Contraseña</label>
-    <input type="password" th:field="*{password}"  id="contrasena" name="contrasena" required pattern=".{5,}"><br>
+        <label for="nombre">Nombre</label>
+        <input type="text" th:field="*{nombre}" id="nombre" name="nombre" required><br>
 
-    <input type="submit" value="Registrarse">
+        <label for="documento">Número de Documento</label>
+        <input type="text" th:field="*{numeroIdentificacion}" id="documento" name="documento" required
+               pattern="[0-9]{5,}"><br>
 
+        <label for="contrasena">Contraseña</label>
+        <input type="password" th:field="*{password}" id="contrasena" name="contrasena" required
+               pattern=".{5,}"><br>
 
-</form>
+        <button type="submit">Registrarse</button>
+
+    </form>
+</main>
+
 </body>
+
 </html>
